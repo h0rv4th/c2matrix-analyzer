@@ -7,39 +7,50 @@ The agent VM has Suricata configured to use the Emerging Threats Open Rules
 Suricata alerts are collected by Wazuh's agent and sent to Wazuh's manager. 
 The Wazuh Manager sends alerts to Elasticsearch and can be viewed in Kibana in both the Discover section and the Wazuh plugin.
 
+![Analysis00](https://github.com/eortizbrossard/c2matrix-evaluation/blob/master/images/suricata00.png)
+
+![Analysis01](https://github.com/eortizbrossard/c2matrix-evaluation/blob/master/images/suricata01.png)
+
+![Analysis02](https://github.com/eortizbrossard/c2matrix-evaluation/blob/master/images/suricata02.png)
+
 Requirements:
 - Virtualbox
 - Vagrant
 
-Enviroment: 
+Enviroment:
 1. master: Manager Wazuh all in one + Elasticsearch + Kibana
 OS: Centos7
 Kibana port 5601 is attached to the local host: 5601
 
-2. agent:  Agent Wazuh + Suricata + ET Open 
+2. agent:  Agent Wazuh + Suricata + ET Open
 OS: Centos7
 
-3. c2server: 
+3. c2server:
 OS: Kali / Debian / Centos7  # Choose one by changing in Vagrantfile
 
 Instructions:
 For deployment, do the following:
 
-Decompresses all files in a directory, and launches the commands from this directory
+Extract all files in a directory, and launches the commands from this directory
 
 To deploy the entire environment:
+
 $ vagrant up 
 
 Deploy a vm:
+
 $ vagrant up [VM_NAME]
 
 Destroy the whole enviroment:
+
 $ vagrant destroy  
 
 Destroy a vm:
+
 $ vagrant destroy [VM_NAME]
 
 Access Kibana:
+
 http://localhost:5601 
 
 Aacces to a vm:
