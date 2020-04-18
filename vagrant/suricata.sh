@@ -3,11 +3,11 @@ wazuh_version=$1
 manager_ip=$2
 node_type=$3
 
-# Install Suricata
+#Add suricata to agent.conf on Master
 if [[ $node_type == "master" ]]
 
 then
-#Add suricata to agent.conf
+
 echo '''<agent_config>
     <localfile>
         <log_format>json</log_format>
@@ -15,6 +15,8 @@ echo '''<agent_config>
     </localfile>
 </agent_config>
 ''' >> /var/ossec/etc/shared/default/agent.conf
+
+#Install Suricata on Agent
 else
 cd /root
 wait
@@ -36,10 +38,12 @@ rm -f /etc/suricata/suricata.yaml
 wait
 wget -O /etc/suricata/suricata.yaml http://www.branchnetconsulting.com/wazuh/suricata.yaml
 wait
+
 # Run Wazuh manager and Wazuh API
 systemctl daemon-reload
 systemctl enable suricata
 systemctl start suricata
+
 # Run Wazuh manager and Wazuh API
 systemctl restart wazuh-agent
 fi
