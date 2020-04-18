@@ -28,7 +28,7 @@ OS: Centos7
 3. c2server:
 OS: Kali / Debian / Centos7  # Choose one by changing in Vagrantfile
 
-#Instructions:
+# Instructions:
 For deployment, do the following:
 
 Extract all files in a directory, and launches the commands from this directory
@@ -62,7 +62,7 @@ master_ip = "192.168.76.2"
 agent_ip = "192.168.76.20"
 c2server_ip = "192.168.76.30"
 
-References:
+# References:
 ```
 - Red Team Kali Package. Inside it has instructions for installing various C2 programs (It may apply to Debian).
 https://bugs.kali.org/view.php?id=6093
