@@ -1,4 +1,4 @@
-# c2matrix-analyser
+# c2matrix-analyzer
 
 Basic c2-matrix analysis enviroment using Suricata + Wazuh + Elastic stack 
 
