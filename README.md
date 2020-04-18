@@ -63,7 +63,7 @@ c2server_ip = "192.168.76.30"
 
 References:
 
-Red Team Kali Package. Inside it has instructions for installing various C2 programs (It may apply to Debian).
+- Red Team Kali Package. Inside it has instructions for installing various C2 programs (It may apply to Debian).
 https://bugs.kali.org/view.php?id=6093
 
 - C2 Matrix:
