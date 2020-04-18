@@ -1,14 +1,22 @@
-# c2matrix-evaluation
+# c2matrix-analyser
 
-Basic c2 environment for testing using Suricata + Wazuh + Elastic stack
-Inside is the Vagrantfile + several scripts to deploy the enviroment. 
+Basic c2-matrix analysis enviroment using Suricata + Wazuh + Elastic stack 
 
-It has two virtual machines at the moment:
+Description:
+The agent VM has Suricata configured to use the Emerging Threats Open Rules
+Suricata alerts are collected by Wazuh's agent and sent to Wazuh's manager. 
+The Wazuh Manager sends alerts to Elasticsearch and can be viewed in Kibana in both the Discover section and the Wazuh plugin.
+
+Requirements:
+- Virtualbox
+- Vagrant
+
+Enviroment: 
 1. master: Manager Wazuh all in one + Elasticsearch + Kibana
 OS: Centos7
 Kibana port 5601 is attached to the local host: 5601
 
-2. agent:  Agent Wazuh + Meerkat + ET Open 
+2. agent:  Agent Wazuh + Suricata + ET Open 
 OS: Centos7
 
 3. c2server: 
@@ -22,17 +30,19 @@ Decompresses all files in a directory, and launches the commands from this direc
 To deploy the entire environment:
 $ vagrant up 
 
-To deploy a vm:
+Deploy a vm:
 $ vagrant up [VM_NAME]
 
+Destroy the whole enviroment:
+$ vagrant destroy  
 
-To destroy a vm:
+Destroy a vm:
 $ vagrant destroy [VM_NAME]
 
-To access Kibana:
+Access Kibana:
 http://localhost:5601 
 
-To acces to a vm:
+Aacces to a vm:
 $ vagrant ssh [VM_NAME]
 
 Network: 
@@ -49,7 +59,14 @@ https://bugs.kali.org/view.php?id=6093
 https://howto.thec2matrix.com/
 https://docs.google.com/spreadsheets/d/1b4mUxa6cDQuTV2BPC6aA-GR4zGZi0ooPYtBe4IgPsSc/edit#gid=0
 
+- Suricata
+https://suricata-ids.org/
 
+- Emergint Threat s
+https://rules.emergingthreats.net/
 
+- Wazuh
+https://github.com/wazuh/wazuh
 
-
+- Elastic
+https://github.com/elastic
