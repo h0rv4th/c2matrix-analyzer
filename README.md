@@ -2,7 +2,7 @@
 
 Basic c2-matrix analysis enviroment using Suricata + Wazuh + Elastic stack 
 
-Description:
+
 The agent VM has Suricata configured to use the Emerging Threats Open Rules
 Suricata alerts are collected by Wazuh's agent and sent to Wazuh's manager. 
 The Wazuh Manager sends alerts to Elasticsearch and can be viewed in Kibana in both the Discover section and the Wazuh plugin.
