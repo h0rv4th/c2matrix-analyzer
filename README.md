@@ -28,41 +28,42 @@ OS: Centos7
 3. c2server:
 OS: Kali / Debian / Centos7  # Choose one by changing in Vagrantfile
 
-Instructions:
+#Instructions:
 For deployment, do the following:
 
 Extract all files in a directory, and launches the commands from this directory
 
 To deploy the entire environment:
-
-$ vagrant up 
-
+```
+$ vagrant up
+``` 
 Deploy a vm:
-
+```
 $ vagrant up [VM_NAME]
-
+```
 Destroy the whole enviroment:
-
+```
 $ vagrant destroy  
-
+```
 Destroy a vm:
-
+```
 $ vagrant destroy [VM_NAME]
-
+```
 Access Kibana:
-
+```
 http://localhost:5601 
-
+```
 Aacces to a vm:
+```
 $ vagrant ssh [VM_NAME]
-
+```
 Network: 
 master_ip = "192.168.76.2"
 agent_ip = "192.168.76.20"
 c2server_ip = "192.168.76.30"
 
 References:
-
+```
 - Red Team Kali Package. Inside it has instructions for installing various C2 programs (It may apply to Debian).
 https://bugs.kali.org/view.php?id=6093
 
@@ -81,3 +82,4 @@ https://github.com/wazuh/wazuh
 
 - Elastic
 https://github.com/elastic
+```
