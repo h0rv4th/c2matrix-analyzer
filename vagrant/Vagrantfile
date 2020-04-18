@@ -1,0 +1,64 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+master_ip = "192.168.76.2"
+agent_ip = "192.168.76.20"
+c2server_ip = "192.168.76.30"
+wazuh_version = "3.10.0"
+wazuh_branch = "3.10"
+elastic_version = "7.3.2"
+
+Vagrant.configure("2") do |config|
+  # All-in-one instance
+  config.vm.define "master" do |master|
+    master.vm.box = "centos/7"
+    master.vm.provision :shell, path: "elastic.sh"
+    master.vm.provision :shell, path: "wazuh.sh"
+    master.vm.provision :shell, path: "common.sh"
+    master.vm.provision :shell, path: "wazuh-manager.sh", args: "#{wazuh_version} #{master_ip} 'master'"
+    master.vm.provision :shell, path: "wazuh-api.sh", args: "#{wazuh_version}"
+    master.vm.provision :shell, path: "filebeat.sh", args: "#{elastic_version} #{master_ip} #{wazuh_version}"
+    master.vm.provision :shell, path: "elasticsearch.sh", args: "#{elastic_version} #{master_ip} #{wazuh_branch}"
+    master.vm.provision :shell, path: "kibana.sh", args: "#{elastic_version} #{master_ip} #{wazuh_version}"
+    master.vm.provision :shell, path: "suricata.sh", args: "#{wazuh_version} #{master_ip} 'master'"
+	    master.vm.network :private_network, ip: "#{master_ip}"
+        master.vm.network "forwarded_port", guest: 5601, host: 5601
+    master.vm.provider "virtualbox" do |pmv|
+#      pmv.memory = 4096
+      pmv.memory = 2048
+      pmv.cpus = 2
+      pmv.linked_clone=true
+    end
+    master.vm.hostname = "master"
+  end
+
+  # Agent instance
+  config.vm.define "agent" do |agent|
+    agent.vm.box = "centos/7"
+    agent.vm.provision :shell, path: "wazuh.sh"
+    agent.vm.provision :shell, path: "common.sh"
+    agent.vm.provision :shell, path: "wazuh-agent.sh", args: "#{wazuh_version} #{master_ip}"
+    agent.vm.provision :shell, path: "suricata.sh", args: "#{wazuh_version} #{master_ip} 'agent'"
+    agent.vm.network :private_network, ip: "#{agent_ip}"
+    agent.vm.provider "virtualbox" do |pmv|
+      pmv.memory = 512
+      pmv.cpus = 1
+      pmv.linked_clone=true
+    end
+    agent.vm.hostname = "agent"
+  end
+
+    # C2server instance
+  config.vm.define "c2server" do |c2server|
+    # Choose the OS
+    #c2server.vm.box = "kalilinux/rolling"
+    #c2server.vm.box = "debian/buster64"
+    c2server.vm.box = "centos/7"
+    c2server.vm.network :private_network, ip: "#{c2server_ip}"
+    c2server.vm.provider "virtualbox" do |pmv|
+      pmv.memory = 4096
+      pmv.cpus = 1
+      pmv.linked_clone=true
+    end
+    c2server.vm.hostname = "c2server"
+  end
+end
