@@ -58,9 +58,9 @@ Aacces to a vm:
 $ vagrant ssh [VM_NAME]
 ```
 Network: 
-master_ip = "192.168.76.2"
-agent_ip = "192.168.76.20"
-c2server_ip = "192.168.76.30"
+- master_ip = "192.168.76.2"
+- agent_ip = "192.168.76.20"
+- c2server_ip = "192.168.76.30"
 
 # References:
 ```
